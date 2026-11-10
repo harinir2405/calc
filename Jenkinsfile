@@ -10,23 +10,36 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                echo 'Building Java Calculator'
-                sh 'mvn clean package'
+                echo 'Building Java application'
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running test cases'
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Creating JAR file'
+                sh 'mvn package -DskipTests'
             }
         }
     }
 
     post {
         success {
-            echo 'Build completed successfully'
-
+            echo 'Pipeline completed successfully'
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
 
         failure {
-            echo 'Build failed. Please check the console output.'
+            echo 'Pipeline failed. Check the console output.'
         }
     }
 }
