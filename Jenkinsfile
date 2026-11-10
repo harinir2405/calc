@@ -14,6 +14,41 @@ pipeline {
     }
 
     stages {
+        stage('Development Deployment') {
+    when {
+        expression {
+            params.BUILD_ENV == 'development'
+        }
+    }
+    steps {
+        echo 'Development environment selected'
+        echo 'Deploying application to Development'
+    }
+}
+
+stage('Testing Deployment') {
+    when {
+        expression {
+            params.BUILD_ENV == 'testing'
+        }
+    }
+    steps {
+        echo 'Testing environment selected'
+        echo 'Deploying application to Testing'
+    }
+}
+
+stage('Production Deployment') {
+    when {
+        expression {
+            params.BUILD_ENV == 'production'
+        }
+    }
+    steps {
+        echo 'Production environment selected'
+        echo 'Deploying application to Production'
+    }
+}
         stage('Checkout') {
             steps {
                 echo 'Downloading source code from GitHub'
