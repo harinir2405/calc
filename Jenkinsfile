@@ -18,11 +18,14 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Running test cases'
-                sh 'mvn test'
-            }
-        }
+    steps {
+        echo 'Running test cases'
+        sh 'mvn test'
+
+        echo 'Introducing an intentional failure'
+        sh 'exit 1'
+    }
+}
 
         stage('Package') {
             steps {
