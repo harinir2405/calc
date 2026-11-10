@@ -21,9 +21,6 @@ pipeline {
     steps {
         echo 'Running test cases'
         sh 'mvn test'
-
-        echo 'Introducing an intentional failure'
-        sh 'exit 1'
     }
 }
 
