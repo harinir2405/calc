@@ -14,6 +14,25 @@ pipeline {
     }
 
     stages {
+        stage('Credentials Demo') {
+    steps {
+        withCredentials([
+            string(
+                credentialsId: 'demo-secret',
+                variable: 'DEMO_SECRET'
+            )
+        ]) {
+            sh '''
+                if [ -n "$DEMO_SECRET" ]; then
+                    echo "Credential successfully retrieved!"
+                else
+                    echo "Credential is missing!"
+                    exit 1
+                fi
+            '''
+        }
+    }
+}
         stage('Development Deployment') {
     when {
         expression {
