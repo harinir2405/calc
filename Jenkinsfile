@@ -14,7 +14,12 @@ pipeline {
     }
 
     stages {
-
+        stage('Checkout') {
+            steps {
+                echo 'Downloading source code from GitHub'
+                checkout scm
+            }
+        }
         stage('Build Information') {
             steps {
                 echo "Application: ${env.APP_NAME}"
@@ -24,20 +29,6 @@ pipeline {
                 echo "Build URL: ${env.BUILD_URL}"
             }
         }
-
-        stage('Checkout') {
-            steps {
-                echo 'Downloading source code from GitHub'
-                checkout scm
-            }
-        }
-        stage('Build Information') {
-    steps {
-        echo "Selected Environment: ${params.BUILD_ENV}"
-        echo "Job Name: ${env.JOB_NAME}"
-        echo "Build Number: ${env.BUILD_NUMBER}"
-    }
-}
         stage('Build') {
             steps {
                 echo 'Building Java application'
