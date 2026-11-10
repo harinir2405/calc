@@ -23,6 +23,7 @@ pipeline {
         stage('Build Information') {
             steps {
                 echo "Application: ${env.APP_NAME}"
+                echo "Selected Environment: ${params.BUILD_ENV}"
                 echo "Job Name: ${env.JOB_NAME}"
                 echo "Build Number: ${env.BUILD_NUMBER}"
                 echo "Workspace: ${env.WORKSPACE}"
