@@ -1,6 +1,13 @@
 
 pipeline {
     agent any
+    parameters {
+    choice(
+        name: 'BUILD_ENV',
+        choices: ['development', 'testing', 'production'],
+        description: 'Select the environment for this build'
+    )
+}
 
     environment {
         APP_NAME = 'Java Calculator'
