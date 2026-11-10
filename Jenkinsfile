@@ -31,7 +31,13 @@ pipeline {
                 checkout scm
             }
         }
-
+        stage('Build Information') {
+    steps {
+        echo "Selected Environment: ${params.BUILD_ENV}"
+        echo "Job Name: ${env.JOB_NAME}"
+        echo "Build Number: ${env.BUILD_NUMBER}"
+    }
+}
         stage('Build') {
             steps {
                 echo 'Building Java application'
